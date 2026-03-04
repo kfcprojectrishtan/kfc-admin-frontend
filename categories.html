@@ -422,8 +422,8 @@
 
         async function loadCategories() {
             try {
-                // public GET
-                const res = await fetch(`${API_URL}/api/menu/categories`);
+                // public GET - active_only=false to show all categories in admin
+                const res = await fetch(`${API_URL}/api/menu/categories?active_only=false`);
                 if (res.ok) {
                     categories = await res.json();
                     // sort
