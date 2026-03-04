@@ -445,8 +445,9 @@
             }
             categories.forEach(c => {
                 const tr = document.createElement('tr');
+                const imageUrl = c.image_url ? (c.image_url.startsWith('http') ? c.image_url : `${API_URL}${c.image_url}`) : '';
                 const thumbHtml = c.image_url
-                    ? `<img src="${API_URL}${c.image_url}" class="thumb-img" alt="${c.title}">`
+                    ? `<img src="${imageUrl}" class="thumb-img" alt="${c.title}">`
                     : `<div class="thumb-placeholder">${c.image_emoji || '📁'}</div>`;
                 tr.innerHTML = `
                     <td>${c.id}</td>
@@ -499,7 +500,7 @@
                 document.getElementById('catSort').value = cat.sort_order || 0;
                 document.getElementById('catActive').checked = cat.is_active;
                 if (cat.image_url) {
-                    preview.src = `${API_URL}${cat.image_url}`;
+                    preview.src = cat.image_url.startsWith('http') ? cat.image_url : `${API_URL}${cat.image_url}`;
                     preview.style.display = 'block';
                     label.textContent = 'Joriy rasm (yangi tanlash mumkin)';
                 }
