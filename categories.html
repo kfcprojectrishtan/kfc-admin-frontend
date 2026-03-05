@@ -528,7 +528,12 @@
             const formData = new FormData();
             formData.append('key', document.getElementById('catKey').value);
             formData.append('title', document.getElementById('catTitle').value);
-            formData.append('sort_order', parseInt(document.getElementById('catSort').value || 0));
+            
+            const sortVal = document.getElementById('catSort').value;
+            if (sortVal !== '') {
+                formData.append('sort_order', parseInt(sortVal));
+            }
+            
             formData.append('is_active', document.getElementById('catActive').checked);
             const imageFile = document.getElementById('catImage').files[0];
             if (imageFile) {
