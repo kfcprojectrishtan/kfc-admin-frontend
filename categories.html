@@ -553,8 +553,11 @@
                 if (res.ok) {
                     closeModal();
                     loadCategories();
+                } else if (res.status === 400 || res.status === 422) {
+                    const data = await res.json();
+                    alert('Xatolik: ' + (data.detail || 'So\'rov noto\'g\'ri shakllantirilgan.'));
                 } else {
-                    alert('Xatolik! Admin kalitini tekshiring yoki serverda muammo.');
+                    alert('Xatolik! Admin kalitini tekshiring yoki serverda muammo: ' + res.status);
                 }
             } catch (err) {
                 console.error(err);
